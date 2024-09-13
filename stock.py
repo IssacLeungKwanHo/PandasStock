@@ -3,7 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 # URL of the Yahoo Finance markets page
-url = 'https://finance.yahoo.com/markets/'
+url = 'http://finance.yahoo.com/quote/%5EGSPC/history/'
 
 # Send a GET request to the webpage
 response = requests.get(url)
@@ -23,7 +23,9 @@ for row in table.find_all('tr'):
         data.append(cols)
 
 # Create a DataFrame and save it as CSV
-df = pd.DataFrame(data, columns=['Name', 'Day Chart', 'Price', 'Change'])
+df = pd.DataFrame(data, columns=['Date', 'High', 'Low', 'Close', 'Adj Close', 'Volume'])
 df.to_csv('market_data.csv', index=False)
 
 print("Data saved to market_data.csv")
+
+print(df)
